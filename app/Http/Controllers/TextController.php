@@ -20,16 +20,60 @@ class TextController extends Controller
 
         $validated = $request->validate([
             'title' => 'required|min:2|max:50',
-            'content' => 'required|max:2000',
+            'content' => 'required|max:1000',
+            'price' => 'required|integer',
+            'email' => 'required|unique:texts|email',
+            'is_visible' => 'required|boolean'
         ]);
 
         Text::create([
             'title' => $request['title'],
-            'content' => $request['content']
+            'content' => $request['content'],
+            'price' => $request['price'],
+            'email' => $request['email'],
+            'is_visible' => $request['is_visible'],
         ]);
 
         session()->flash('flash_message', '記事を投稿しました。');
 
         return redirect()->route('texts.index');
     }    
+
+    public function show($id){
+        // dd($id);
+        $text = Text::findOrFail($id);
+        return view('texts.show', compact('text'));
+    }
+
+    public function edit($id){
+        $text = Text::findOrFail($id);
+        return view('texts.edit', compact('text'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'title' => 'required|min:2|max:50',
+            'content' => 'required|max:1000',
+            'price' => 'required|integer',
+            'email' => 'required|unique:texts|email',
+            'is_visible' => 'required|boolean'
+        ]);
+
+        $text = Text::findOrFail($id);
+        $text->title = $request['title'];
+        $text->content = $request['content'];
+        $text->price = $request['price'];
+        $text->email = $request['email'];
+        $text->is_visible = $request['is_visible'];
+        $text->save();
+
+        return redirect()->route('texts.index');
+    }
+
+    public function delete($id)
+    {
+        $text = Text::findOrFail($id)->delete();
+        return redirect()->route('texts.index');
+    }
 }

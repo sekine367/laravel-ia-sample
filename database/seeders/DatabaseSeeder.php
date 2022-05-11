@@ -15,5 +15,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+
+        $this->call([
+            CommentSeeder::class,
+            TextSeeder::class,
+        ]);
+
+
+         \App\Models\Product::factory(10)->create();
+         \App\Models\Text::factory(10)->create();
     }
 }
