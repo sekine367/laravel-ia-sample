@@ -7,7 +7,9 @@ ID : {{ $text->id}}<br>
 アドレス：{{ $text->email}}<br> 
 内容： {{ $text->content }}<br>
 表示：{{ $text->is_visible }}<br>
-ユーザー：{{ $textUser->name }}<br>
+ユーザー：<a href="{{ route('users.index', [ 'id' => $textUser->id ])}}">
+{{ $textUser->name }}
+</a><br>
 
 <a href="{{ route('texts.edit', [ 'id'=> $text->id ])}}">編集する</a> 
 

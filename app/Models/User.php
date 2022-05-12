@@ -43,6 +43,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // public function scopeVisible($query, $id){
+    //     return $query->where('is_visible', 1)->where('id', $id);
+    // }
+
     public function texts()
     {
         return $this->hasMany(Text::class);

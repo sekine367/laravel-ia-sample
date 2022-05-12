@@ -10,5 +10,5 @@
 <h1>Text</h1>
 @foreach($texts as $text)
 <a href="{{ route('texts.show', [ 'id'=> $text->id ])}}"> {{ $text->id }} </a> : 
-{{ $text->id }} : {{ $text->title }} : {{ $text->price}}<br>
+{{ $text->title }} : {{ $text->price}}<br>
 @endforeach
