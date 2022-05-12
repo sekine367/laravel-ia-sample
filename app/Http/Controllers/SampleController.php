@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Sample;
+use App\Http\Requests\SampleRequest;
 
 class SampleController extends Controller
 {
@@ -17,12 +18,13 @@ class SampleController extends Controller
         return view('samples.create');
     }
 
-    public function store(Request $request){
+    public function store(SampleRequest $request){
 
-        $validated = $request->validate([
-            'name' => 'required|min:2|max:255',
-            'email' => 'required|unique:samples|email',
-        ]);
+        // $validated = $request->validate([
+        //     'name' => 'required|min:2|max:255',
+        //     'email' => 'required|unique:samples|email',
+        // 'email' => ['required', Rule::unique('texts')];
+        // ]);
         // dd($request);
 
         Sample::create([

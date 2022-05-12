@@ -17,12 +17,14 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $this->call([
+            UserSeeder::class,
             CommentSeeder::class,
-            TextSeeder::class,
+            // TextSeeder::class,
+           
         ]);
 
 
          \App\Models\Product::factory(10)->create();
-         \App\Models\Text::factory(10)->create();
+         \App\Models\Text::factory(200)->create();
     }
 }

@@ -18,6 +18,7 @@ class TextFactory extends Factory
     {
         return [
             'title' => $this->faker->word,
+            'user_id' => $this->faker->numberBetween(1,3),
             'content' => $this->faker->paragraph,
             'price' => $this->faker->numberBetween(100, 1000),
             'email' => $this->faker->email,

@@ -6,6 +6,8 @@ ID : {{ $text->id}}<br>
 値段：{{ $text->price}}円<br>
 アドレス：{{ $text->email}}<br> 
 内容： {{ $text->content }}<br>
+表示：{{ $text->is_visible }}<br>
+ユーザー：{{ $textUser->name }}<br>
 
 <a href="{{ route('texts.edit', [ 'id'=> $text->id ])}}">編集する</a> 
 

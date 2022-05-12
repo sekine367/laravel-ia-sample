@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('texts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->unsignedBigInteger('user_id'); 
             $table->text('content');
             $table->string('email');
             $table->integer('price');
             $table->boolean('is_visible');
             $table->timestamps();
+            // $table->foreignId(('user_id'));
         });
     }
 

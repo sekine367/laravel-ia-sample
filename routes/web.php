@@ -15,6 +15,12 @@ use App\Http\Controllers\TextController;
 |
 */
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,7 +33,6 @@ Route::get('/samples/{id}', [SampleController::class, 'show'])->name('samples.sh
 Route::get('/samples/{id}/edit', [SampleController::class, 'edit'])->name('samples.edit');
 Route::post('samples/{id}', [SampleController::class, 'update'])->name('samples.update');
 Route::post('/samples/{id}/delete', [ SampleController::class, 'delete' ])->name('samples.delete');
-
 
 
 

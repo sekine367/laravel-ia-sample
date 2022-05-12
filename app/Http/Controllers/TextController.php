@@ -4,12 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Text;
+use App\Models\User;
+use Illuminate\Validation\Rule;
+
 
 class TextController extends Controller
 {
     public function index(){
-        $texts = Text::all();
+        // $texts = Text::all();
+        $texts = Text::visible()->get();
         // dd($texts);
+
+        // $user = User::find(1)->products;
+        // dd($user);
+
+        $userTexts = User::find(1)->texts;
+        dump($userTexts);
+        // foreach($userTexts as $userText)
+        // {
+        //     echo '<pre>';
+        //     var_dump($userText->id, $userText->title);
+        //     echo '</pre>';
+        // }
+
+
+        $textUsers = Text::find(2)->user;
+        dump($textUsers);
+
         return view('texts.index', compact('texts'));
     }
     public function create(){
@@ -42,7 +63,8 @@ class TextController extends Controller
     public function show($id){
         // dd($id);
         $text = Text::findOrFail($id);
-        return view('texts.show', compact('text'));
+        $textUser = Text::find($id)->user;
+        return view('texts.show', compact('text', 'textUser'));
     }
 
     public function edit($id){
@@ -56,7 +78,8 @@ class TextController extends Controller
             'title' => 'required|min:2|max:50',
             'content' => 'required|max:1000',
             'price' => 'required|integer',
-            'email' => 'required|unique:texts|email',
+            // 'email' => 'required|unique:texts|email',
+            'email' => ['required', Rule::unique('texts')->ignore($request->id)],
             'is_visible' => 'required|boolean'
         ]);
 
