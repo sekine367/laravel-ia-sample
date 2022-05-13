@@ -67,7 +67,8 @@ class TextController extends Controller
         return view('texts.show', compact('text', 'textUser'));
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $text = Text::findOrFail($id);
         return view('texts.edit', compact('text'));
     }

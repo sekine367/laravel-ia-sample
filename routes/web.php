@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\LectureController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\TextController;
 use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,10 @@ require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/lectures/index', [ LectureController::class, 'index'])->name('lectures.index');    
 });
 
 Route::get('/samples/index', [SampleController::class, 'index'])->name('samples.index');
@@ -47,3 +53,6 @@ Route::post('texts/{id}', [TextController::class, 'update'])->name('texts.update
 Route::post('/texts/{id}/delete', [ TextController::class, 'delete' ])->name('texts.delete');
 
 Route::get('/users/{id}/index', [UserController::class, 'index'])->name('users.index');
+
+
+// Route::get('/lectures/index', [LectureController::class, 'index'])->name('lectures.index');

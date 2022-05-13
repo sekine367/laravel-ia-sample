@@ -16,4 +16,4 @@ ID : {{ $text->id}}<br>
 <form method="post" action="{{ route('texts.delete', [ 'id' => $text->id ])}}">
   @csrf
   <button>削除する</button>
-</form>  
+</form>

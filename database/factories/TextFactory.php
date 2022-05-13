@@ -17,9 +17,9 @@ class TextFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->word,
+            'title' => $this->faker->name,
             'user_id' => $this->faker->numberBetween(1,3),
-            'content' => $this->faker->paragraph,
+            'content' => $this->faker->realText,
             'price' => $this->faker->numberBetween(100, 1000),
             'email' => $this->faker->email,
             'is_visible' => $this->faker->boolean,

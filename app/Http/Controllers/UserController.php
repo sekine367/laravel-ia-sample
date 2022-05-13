@@ -8,7 +8,8 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function index($id){
+    public function index($id)
+    {
         $user = User::find($id);
         $userTexts = User::find($id)->texts;
         return view('users.index', compact('user','userTexts'));
