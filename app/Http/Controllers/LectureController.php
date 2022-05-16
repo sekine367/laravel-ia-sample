@@ -6,19 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Lecture;
 use Illuminate\Support\Facades\Auth;
+use App\Services\Lectures\GetUserService;
 
 
 class LectureController extends Controller
 {
     public function index()
     {
-        $user = User::find(Auth::id());
+        $user = GetUserService::auth();
         return view('lectures.index', compact('user'));
     }
 
     public function edit()
     {
-        $user = User::find(Auth::id());
+        $user = GetUserService::auth();
         $lectures = Lecture::all();
         foreach($lectures as $lecture)
         {
@@ -43,7 +44,7 @@ class LectureController extends Controller
     public function update(Request $request)
     {
         // dd($request);
-        $user = User::find(Auth::id());
+        $user = GetUserService::auth();
         $user->lectures()->sync($request->lecture);
         return redirect()->route('lectures.index');
     }
