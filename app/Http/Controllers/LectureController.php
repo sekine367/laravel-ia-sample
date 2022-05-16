@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Lecture;
 use Illuminate\Support\Facades\Auth;
 use App\Services\Lectures\GetUserService;
+use Illuminate\Support\Facades\Log;
 
 
 class LectureController extends Controller
@@ -14,6 +15,7 @@ class LectureController extends Controller
     public function index()
     {
         $user = GetUserService::auth();
+        Log::info("user data " . $user);
         return view('lectures.index', compact('user'));
     }
 
