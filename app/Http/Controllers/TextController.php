@@ -12,24 +12,13 @@ class TextController extends Controller
 {
     public function index(){
         // $texts = Text::all();
-        $texts = Text::visible()->get();
-        // dd($texts);
-
-        // $user = User::find(1)->products;
-        // dd($user);
-
-        $userTexts = User::find(1)->texts;
-        dump($userTexts);
-        // foreach($userTexts as $userText)
-        // {
-        //     echo '<pre>';
-        //     var_dump($userText->id, $userText->title);
-        //     echo '</pre>';
-        // }
+        $texts = Text::visible()->paginate(10);
+        // $userTexts = User::find(1)->texts;
+        // dump($userTexts);
 
 
-        $textUsers = Text::find(2)->user;
-        dump($textUsers);
+        // $textUsers = Text::find(2)->user;
+        // dump($textUsers);
 
         return view('texts.index', compact('texts'));
     }
@@ -47,14 +36,20 @@ class TextController extends Controller
             'is_visible' => 'required|boolean'
         ]);
 
-        Text::create([
-            'title' => $request['title'],
-            'content' => $request['content'],
-            'price' => $request['price'],
-            'email' => $request['email'],
-            'is_visible' => $request['is_visible'],
-        ]);
+        DB::beginTransaction();
+        try {
+            Text::create([
+                'title' => $request['title'],
+                'content' => $request['content'],
+                'price' => $request['price'],
+                'email' => $request['email'],
+                'is_visible' => $request['is_visible'],
+            ]);
 
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
         session()->flash('flash_message', '記事を投稿しました。');
 
         return redirect()->route('texts.index');

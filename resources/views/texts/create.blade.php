@@ -23,10 +23,10 @@ create
   <label for="">メールアドレス</label>
   <input type="text" name="email" value="{{ old('email') }}"><br>
 
-  <input type="radio" name="is_visible"  id="visible" value="1">
+  <input type="radio" name="is_visible"  id="visible" value="1" {{ old('is_visible')  == "1" ? 'checked' : '' }}>
   <label for="visible">表示する</label><br>
 
-  <input type="radio" name="is_visible"  id="invisible" value="0">
+  <input type="radio" name="is_visible"  id="invisible" value="0" {{ old('is_visible')  == "0" ? 'checked' : '' }}>
   <label for="invisible">表示しない</label><br>
   <button>送信</button>
 </form>

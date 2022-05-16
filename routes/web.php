@@ -31,8 +31,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function(){
     Route::get('/lectures/index', [ LectureController::class, 'index'])->name('lectures.index');
     Route::get('/lectures/edit', [ LectureController::class, 'edit'])->name('lectures.edit');    
-    Route::post('/lectures/update', [ LectureController::class, 'update'])->name('lectures.update');    
-
+    Route::post('/lectures/update', [ LectureController::class, 'update'])->name('lectures.update');
 });
 
 Route::get('/samples/index', [SampleController::class, 'index'])->name('samples.index');
