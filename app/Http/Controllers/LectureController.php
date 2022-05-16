@@ -48,4 +48,13 @@ class LectureController extends Controller
         // dd('hello');
         return view('lectures.index', compact('lecture_checkBox', 'user'));
     }
+
+    public function update(Request $request)
+    {
+        // dd($request);
+        $user = User::find(Auth::id());
+        $user->lectures()->sync($request->lecture);
+
+        return redirect()->route('lectures.index');
+    }
 }
