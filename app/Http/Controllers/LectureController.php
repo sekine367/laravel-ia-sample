@@ -13,6 +13,12 @@ class LectureController extends Controller
     public function index()
     {
         $user = User::find(Auth::id());
+        return view('lectures.index', compact('user'));
+    }
+
+    public function edit()
+    {
+        $user = User::find(Auth::id());
         $lectures = Lecture::all();
         foreach($lectures as $lecture)
         {
@@ -30,23 +36,8 @@ class LectureController extends Controller
                                      'check' => $check,
                                   ];            
         };
-        // dd($lecture_checkBox);
-        // foreach($user->lectures as $lecture)
-        // {
-        //     // $lecture_id = $lecture->pivot->lecture_id;
-        //     // dump($lecture_id);
-        // }
-        // dd('hello');
-
-        // $lecture = Lecture::find(1);
-        // // $test = $user->lectures;
-        // // dd($user);
-        // foreach($lecture->users as $user)
-        // {
-        //     dump($user);
-        // }
-        // dd('hello');
-        return view('lectures.index', compact('lecture_checkBox', 'user'));
+      
+        return view('lectures.edit', compact('lecture_checkBox', 'user'));
     }
 
     public function update(Request $request)
@@ -54,7 +45,6 @@ class LectureController extends Controller
         // dd($request);
         $user = User::find(Auth::id());
         $user->lectures()->sync($request->lecture);
-
         return redirect()->route('lectures.index');
     }
 }
