@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Text;
 use App\Models\User;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 
 class TextController extends Controller
@@ -38,9 +39,12 @@ class TextController extends Controller
 
         DB::beginTransaction();
         try {
+            $img = $request->file('img_path');
+            $path = $img->store('img','public');
             Text::create([
                 'title' => $request['title'],
                 'content' => $request['content'],
+                'img_path' => $path,
                 'price' => $request['price'],
                 'email' => $request['email'],
                 'is_visible' => $request['is_visible'],

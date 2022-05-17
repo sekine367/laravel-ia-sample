@@ -11,7 +11,7 @@ class Text extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'content', 'price', 'email', 'is_visible'
+        'title', 'content', 'price', 'img_path', 'email', 'is_visible'
     ];
     protected $table = 'texts';
 

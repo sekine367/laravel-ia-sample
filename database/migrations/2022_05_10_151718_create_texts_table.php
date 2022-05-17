@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('email');
             $table->integer('price');
+            $table->string('img_path')->nullable()->default(null);
             $table->boolean('is_visible');
             $table->timestamps();
             // $table->foreignId(('user_id'));

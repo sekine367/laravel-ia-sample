@@ -9,13 +9,16 @@ create
     </div>
 @endif
 
-<form action="{{ route('texts.store')}}" method="post">
+<form action="{{ route('texts.store')}}" method="post" enctype="multipart/form-data">
   @csrf
   <label for="">タイトル</label>
   <input type="text" name="title" value="{{ old('title') }}"><br>
 
   <label for="">内容</label>
   <input type="text" name="content" value="{{ old('content') }}"><br>
+
+  <label for="">画像</label>
+  <input type="file" name="img_path"><br>
 
   <label for="">金額</label>
   <input type="text" name="price" value="{{ old('price') }}">円<br>
