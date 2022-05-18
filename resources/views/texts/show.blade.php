@@ -6,7 +6,13 @@ ID : {{ $text->id}}<br>
 値段：{{ $text->price}}円<br>
 アドレス：{{ $text->email}}<br> 
 内容： {{ $text->content }}<br>
-<img src="{{ Storage::url($text->img_path) }}" ><br>
+<div>
+    @if (isset($text->img_path))
+       <img src="{{ \Storage::url($text->img_path) }}" width="25%">
+    @else
+       <img src="{{ \Storage::url('texts/no-image.jpg') }}" width="25%">
+    @endif
+  </div>
 表示：{{ $text->is_visible }}<br>
 ユーザー：<a href="{{ route('users.index', [ 'id' => $textUser->id ])}}">
 {{ $textUser->name }}

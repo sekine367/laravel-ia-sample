@@ -30,6 +30,7 @@ class TextController extends Controller
     }
 
     public function store(Request $request){
+        // dd($request);
 
         $validated = $request->validate([
             'title' => 'required|min:2|max:50',
@@ -76,6 +77,20 @@ class TextController extends Controller
 
     public function update(Request $request, $id)
     {
+        $text = Text::findOrFail($id);
+        // 画像ファイルインスタンス取得
+        $img = $request->file('img_path');
+        // dump($image);
+        // 現在の画像へのパスをセット
+        // dd( $text);
+        $path = $text->img_path;
+        // dd($path);
+        if (isset($img) && isset($path)) {
+            // 現在の画像ファイルの削除
+            \Storage::disk('public')->delete($path);
+            // 選択された画像ファイルを保存してパスをセット
+        }
+        $path = $img->store('img','public');
         $validated = $request->validate([
             'title' => 'required|min:2|max:50',
             'content' => 'required|max:1000',
@@ -85,11 +100,12 @@ class TextController extends Controller
             'is_visible' => 'required|boolean'
         ]);
 
-        $text = Text::findOrFail($id);
+        
         $text->title = $request['title'];
         $text->content = $request['content'];
         $text->price = $request['price'];
         $text->email = $request['email'];
+        $text->img_path = $path;
         $text->is_visible = $request['is_visible'];
         $text->save();
 

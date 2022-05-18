@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('/texts/{id}', [TextController::class, 'show'])->name('texts.show');
     Route::get('/texts/{id}/edit', [TextController::class, 'edit'])->name('texts.edit');
-    Route::post('texts/{id}', [TextController::class, 'update'])->name('texts.update');
+    Route::patch('texts/{id}', [TextController::class, 'update'])->name('texts.update');
     Route::post('/texts/{id}/delete', [ TextController::class, 'delete' ])->name('texts.delete');
 
     Route::get('/users/{id}/index', [UserController::class, 'index'])->name('users.index');
