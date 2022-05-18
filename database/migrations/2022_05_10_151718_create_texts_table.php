@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('texts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->unsignedBigInteger('user_id'); 
+            $table->unsignedBigInteger('user_id')->default(1); 
             $table->text('content');
             $table->string('email');
             $table->integer('price');

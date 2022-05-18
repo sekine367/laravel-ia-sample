@@ -22,11 +22,10 @@ class DatabaseSeeder extends Seeder
             LectureSeeder::class,
             LectureUserSeeder::class,
             // TextSeeder::class,
-           
         ]);
 
 
          \App\Models\Product::factory(10)->create();
-         \App\Models\Text::factory(200)->create();
+         \App\Models\Text::factory(10)->create();
     }
 }

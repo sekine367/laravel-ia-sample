@@ -6,6 +6,7 @@ ID : {{ $text->id}}<br>
 値段：{{ $text->price}}円<br>
 アドレス：{{ $text->email}}<br> 
 内容： {{ $text->content }}<br>
+<img src="{{ Storage::url($text->img_path) }}" ><br>
 表示：{{ $text->is_visible }}<br>
 ユーザー：<a href="{{ route('users.index', [ 'id' => $textUser->id ])}}">
 {{ $textUser->name }}

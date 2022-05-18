@@ -7,13 +7,15 @@ use App\Models\Text;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class TextController extends Controller
 {
     public function index(){
         // $texts = Text::all();
-        $texts = Text::visible()->paginate(10);
+        $texts = Text::visible()->paginate(20);
+        // $texts = Text::visible()->get();
         // $userTexts = User::find(1)->texts;
         // dump($userTexts);
 
@@ -36,14 +38,14 @@ class TextController extends Controller
             'email' => 'required|unique:texts|email',
             'is_visible' => 'required|boolean'
         ]);
-
+        $img = $request->file('img_path');
+        $path = $img->store('img','public');
         DB::beginTransaction();
         try {
-            $img = $request->file('img_path');
-            $path = $img->store('img','public');
             Text::create([
                 'title' => $request['title'],
                 'content' => $request['content'],
+                'user_id' => Auth::id(),
                 'img_path' => $path,
                 'price' => $request['price'],
                 'email' => $request['email'],
@@ -51,11 +53,11 @@ class TextController extends Controller
             ]);
 
             DB::commit();
+            session()->flash('flash_message', '記事を投稿しました。');
         } catch (\Exception $e) {
             DB::rollback();
+            throw $e;
         }
-        session()->flash('flash_message', '記事を投稿しました。');
-
         return redirect()->route('texts.index');
     }    
 

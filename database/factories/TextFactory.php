@@ -17,13 +17,13 @@ class TextFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->name,
+            'title' => $this->faker->name(),
             'user_id' => $this->faker->numberBetween(1,3),
-            'content' => $this->faker->realText,
+            'content' => $this->faker->realText(),
             // 'img_path'=> $this->faker->word,
             'price' => $this->faker->numberBetween(100, 1000),
-            'email' => $this->faker->email,
-            'is_visible' => $this->faker->boolean,
+            'email' => $this->faker->email(),
+            'is_visible' => $this->faker->boolean(),
         ];
     }
 }
